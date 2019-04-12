@@ -33,18 +33,25 @@ cycle = 0
 
 def scan_chan():
     for board in boards:
+        print('loading boards......')
         url = ("http://boards.4chan.org/{}".format(board))
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
         response = requests.get(url, headers=headers)
         stuff = response.text.split('<br>')
+        #print(stuff)
         for post in stuff:
             i = post.split('a href="thread/')
             if '"replylink">Reply<' in str(i):
                 i = str(i).split('[')
+                #print(i)
                 sub = i[2].split('" class=')[0]
-                if "<', '" in sub:
-                    sub = sub.replace("<', '", "")
+                #print(sub)
+                #if "<', '" in sub:
+                if "', u'" in sub:
+                    #print(sub)
+                    sub = sub.replace("<', u'", "")
                     if sub not in subT:
+                        #print(sub)
                         subT.append(board+'/thread/'+sub)
 
 def fill_x():
