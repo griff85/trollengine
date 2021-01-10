@@ -46,8 +46,8 @@ def scan_chan():
                 #print(i)
                 sub = i[2].split('" class=')[0]
                 #print(sub)
-                #if "<', '" in sub:
-                if "', u'" in sub:
+                if "<', '" in sub:
+                #if "', u'" in sub:
                     #print(sub)
                     sub = sub.replace("<', u'", "")
                     if sub not in subT:
